@@ -2,9 +2,7 @@ package com.desafiomodelodominio.exercicio.entities;
 
 import jakarta.persistence.*;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "tb_atividade")
@@ -20,6 +18,12 @@ public class Atividade {
 
     @ManyToMany(mappedBy = "atividades")
     Set<Participante> participantes = new HashSet<>();
+
+    @OneToMany(mappedBy = "atividade")
+    List<Categoria> categorias = new ArrayList<>();
+
+    @OneToMany(mappedBy = "atividadeCategoria")
+    List<Bloco> blocos = new ArrayList<>();
 
     public Atividade() {
     }
@@ -78,5 +82,9 @@ public class Atividade {
 
     public Set<Participante> getParticipantes() {
         return participantes;
+    }
+
+    public List<Categoria> getCategorias() {
+        return categorias;
     }
 }
